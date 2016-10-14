@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<recovery>
+    <styles>
+        <style name="text_l">
+            <font color="%text_color%" resource="font_l" />
+        </style>
+
+        <style name="text_m">
+            <font color="%text_color%" resource="font_m" />
+        </style>
+
+        <style name="console">
+            <fastscroll rectcolor="%accent_color%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+            <color foreground="%text_color%" background="%background_color%" scroll="%background_color%"/>
+            <font resource="fixed"/>
+        </style>
+
+        <style name="main_button_half_height">
+            <highlight color="%highlight_color%"/>
+            <font resource="font_m" color="%text_button_color%"/>
+            <image resource="main_button_half_height"/>
+        </style>
+    </styles>
+
+    <pages>
+        <page name="main">
+            <action>
+                <actions>
+                    <action function="set">tw_clear_destination=main2</action>
+                    <action function="page">clear_vars</action>
+                </actions>
+            </action>
+        </page>
+
+        <page name="clear_vars">
+            <action>
+                <action function="set">tw_operation_state=0</action>
+                <action function="set">tw_text1=</action>
+                <action function="set">tw_text2=</action>
+                <action function="set">tw_text3=</action>
+                <action function="set">tw_text4=</action>
+                <action function="set">tw_action_text1=</action>
+                <action function="set">tw_action_text2=</action>
+                <action function="set">tw_action_param=</action>
+                <action function="set">tw_has_action2=0</action>
+                <action function="set">tw_action2=</action>
+                <action function="set">tw_action2_param=</action>
+                <action function="set">tw_has_cancel=0</action>
+                <action function="set">tw_cancel_action=</action>
+                <action function="set">tw_cancel_param=</action>
+                <action function="set">tw_show_exclamation=0</action>
+                <action function="set">tw_show_reboot=0</action>
+                <action function="page">%tw_clear_destination%</action>
+            </action>
+        </page>
+
+        <page name="main2">
+            <template name="page"/>
+
+            <text style="text_l">
+                <placement x="%col1_x_header%" y="%row3_header_y%"/>
+                <text>{@twrp_header=testcase}</text>
+            </text>
+
+            <text style="text_m">
+                <condition var1="tw_no_cpu_temp" var2="0"/>
+                <placement x="%col1_x_header%" y="%row4_header_y%"/>
+                <text>%tw_version%</text>
+            </text>
+
+            <template name="console"/>
+
+            <template name="progress_bar"/>
+
+            <!--<textbox>-->
+                <!--<placement x="%progress_x%" y="%row16_y%"/>-->
+                <!--<resource empty="progress_empty" full="progress_full"/>-->
+                <!--<data name="ui_progress"/>-->
+            <!--</textbox>-->
+
+            <button style="main_button_half_height">
+                <placement x="%center_x%" y="%row21a_y%"/>
+                <text>AddLog</text>
+                <action function="addlog">hello, world</action>
+            </button>
+        </page>
+
+    </pages>
+</recovery>
